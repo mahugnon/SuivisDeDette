@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="background-color: #4F7A4F ">
+        <h:form>
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto" >
+                
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Modification d'une dette</b> 
+                </f:facet>
+                
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                    <p:outputLabel style="color: #ffffff" value="Numéro :" />
+                    <h:outputText style="color: #ffffff" value="#{detteBean.dette.idDette}"  /> 
+
+                    <h:outputText value="Montant dette :"  style="color: #ffffff"/>
+                    <h:inputText value="#{detteBean.dette.detteBrute}" style="color: #e27c16;border-radius: 8px" /> 
+
+                    <p:outputLabel value="Montant payé :" style="color: #ffffff"/>
+                    <h:inputText value="#{detteBean.dette.montantPaye}" style="color:#e27c16;border-radius: 8px"/>
+
+                    <p:outputLabel value="Etat de la dette :" style="color: #ffffff"/>
+                    <p:selectOneRadio  value="#{detteBean.dette.etat}" layout="pageDirection" style="color: #ffffff;border-radius: 8px">
+                        <f:selectItem itemLabel="Payé" itemValue="Payé"/>
+                        <f:selectItem itemLabel="Non Payé" itemValue="Non Payé"/>
+                    
+                    </p:selectOneRadio>
+
+                    <p:outputLabel value="Date Création :" style="color: #ffffff" />
+                    <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                timeZone="Europe/Paris" 
+                                style="color: #e27c16; background: #ffffff;border-radius: 8px"
+                                value="#{detteBean.dette.dateCreation}" pattern="dd/MM/yyyy"  
+                                />
+                    <p:commandButton value="Enregistrer" style="color: #e27c16; background: #ffffff;border-radius: 20px" action="#{detteBean.modifierDetteBean()}"/>
+                    <p:commandButton value="Retour" style="color: #e27c16; background: #ffffff;border-radius: 20px" action="#{redirectBean.versListerDette()}"/>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

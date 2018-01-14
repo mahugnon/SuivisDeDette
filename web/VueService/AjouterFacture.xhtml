@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Gestion Facture</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form id="form">
+                <p:growl id="message" />
+
+                <p:panel style="background: #e27c16; font-style:oblique " >
+                     <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Ajouter une facture</b> 
+                </f:facet>
+                    <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                        <p:outputLabel style="color: #ffffff" value="Numero Facture :"/>
+                        <p:inputText style="color: #e27c16" value="#{factureBean.facture.numFacture}" required="true" placeholder="entrer numéro facture"/>
+
+                        <p:outputLabel style="color: #ffffff" value="Projet :"/>
+                        <h:panelGroup>
+                            <p:selectOneMenu style="color: #e27c16" id="projet" value="#{factureBean.nomProjet}"  var="projet_var"
+                                             filterMatchMode="startsWith" effect="fade"  filter="true">
+                                <f:selectItem itemLabel="Selectionner Projet" itemValue=""/>
+                                <f:selectItems value="#{factureBean.listprojet}" var="projetItem_var"
+                                               itemLabel="#{projetItem_var.nomProjet}" itemValue="#{projetItem_var.nomProjet}"/>
+                            </p:selectOneMenu>
+
+                            <p:column>
+                                <p:commandLink style="color: #0000ff" value="Ajouter Projet" action="#{redirectBean.verscreationProjet()}"/>
+                            </p:column>
+                        </h:panelGroup>
+
+                        <p:outputLabel style="color: #ffffff" for="societe" value="Societe :"/>
+                        <h:panelGroup>
+                            <p:selectOneMenu style="color: #e27c16" id="societe" value="#{factureBean.nomSociete}" var="societe_var"
+                                             filterMatchMode="startsWith" effect="fade"  filter="true">
+                                <f:selectItem itemLabel="Selectionner Societe" itemValue=""/>
+                                <f:selectItems value="#{factureBean.listsociete}" var="societeItem_var" itemLabel="#{societeItem_var.nomSociete}"
+                                               itemValue="#{societeItem_var.nomSociete}"/>
+                            </p:selectOneMenu>
+
+                            <p:column >
+                                <p:commandLink style="color: #0000ff" value="Ajouter Societe" action="#{redirectBean.verscreationSociete()}" title="Ajouter une nouvelle société"/>
+                            </p:column>
+                            
+                        </h:panelGroup>
+                        <p:outputLabel style="color: #ffffff" value="Date d'arrivé Facture :"/>
+                        <p:calendar style="color: #e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                    timeZone="Europe/Paris" 
+                                    value="#{factureBean.facture.dateArrive}" pattern="dd/MM/yyyy" placeholder="entrer date d'arrivé"/>
+                        <p:outputLabel style="color: #ffffff" value="Date Paiement  :"/>
+                        <p:calendar style="color: #e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                    timeZone="Europe/Paris" 
+                                    value="#{factureBean.facture.datePaiement}" pattern="dd/MM/yyyy" placeholder="entrer date paiement" />
+                        <p:outputLabel style="color: #ffffff" value="Montant Facture :"/>
+                        <p:inputText style="color: #e27c16" id="montantfacture" value="#{factureBean.facture.montantFacture}" size="20" >
+                            <f:convertNumber minFractionDigits="2" />
+                        </p:inputText>
+                        <p:outputLabel style="color: #ffffff" value="Detail facture  :"/>
+
+                        <h:inputTextarea style="color: #e27c16" value="#{factureBean.facture.detail}" />
+
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="Enregistrer" action="#{factureBean.ajouterFactureBean()}"/>
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="Retour" action="#{redirectBean.verslisterFacture()}"/>
+                 
+
+                        <p:dialog header="Creer Societe" widgetVar="CrS" resizable="false" id="carDlg"
+                                  showEffect="fade" hideEffect="explode" modal="true">
+                            <h:panelGrid id="creer" columns="2" cellpadding="5" > 
+                                <p:outputLabel value="Nom :"/>
+                                <p:inputText value="#{societeBean.societe.nomSociete}"  />
+
+                                <p:outputLabel value="Adresse :"/>
+                                <p:inputText value="#{societeBean.societe.adresseSociete}" />
+
+                                <p:outputLabel value="Contact :"/>
+                                <p:inputText value="#{societeBean.societe.contactSociete}" />
+
+                                <p:outputLabel value="Nature :"/>
+                                <p:selectOneRadio id="nature" value="#{societeBean.societe.nature}">
+                                    <f:selectItem itemLabel="Privée" itemValue="Privée"/>
+                                    <f:selectItem itemLabel="Public" itemValue="Public"/>
+                                </p:selectOneRadio>
+
+                                <p:commandButton value="Add" action="#{factureBean.ajouterFactureBean()}"/>
+
+                                <p:commandButton value="Annuler" onclick="PF('CrS').hide()" />
+
+                            </h:panelGrid>
+                        </p:dialog>     
+
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>     
+        </h:body>
+
+    </f:view>
+</html>
+

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        <h:head>
+             <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Ajout de societe</title>
+            </f:facet>
+        </h:head>
+
+        <h:body style="background-color: #4F7A4F ">
+            <h:form >
+
+                <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto;border-radius: 20px" >
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Ajouter une Société</b> 
+                    </f:facet>
+                    <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                        <p:outputLabel style="color: #ffffff" value="Nom Société:" />
+                        <p:inputText style="color: #e27c16;border-radius: 8px" value="#{societeBean.societe.nomSociete}" placeholder="nom de la société" />
+
+                        <p:outputLabel style="color: #ffffff" value="Adresse Société:" />
+                        <p:inputText style="color: #e27c16;border-radius: 8px" value="#{societeBean.societe.adresseSociete}" placeholder="adresse de la société"/>
+
+                        <p:outputLabel style="color: #ffffff" value="Nature Société:" />
+                        <h:panelGroup>
+                            <p:selectOneRadio style="color: #ffffff;border-radius: 8px" value="#{societeBean.societe.nature}" layout="pageDirection">
+                                <f:selectItem itemLabel="Privée" itemValue="Privée"/>
+                                <f:selectItem itemLabel="Publique" itemValue="Publique"/>
+                            </p:selectOneRadio>
+                        </h:panelGroup>
+
+                        <p:outputLabel style="color: #ffffff" value="Contact Société:" />
+                        <p:inputText style="color: #e27c16;border-radius: 8px" placeholder="contact de la société" value="#{societeBean.societe.contactSociete}"/>
+
+                        <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Enregistrer" action="#{societeBean.ajouterSocieteBean()}"/>
+                        <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Retour" action="#{redirectBean.verslisterSociete()}"/>
+
+                    </h:panelGrid>
+                    
+                </p:panel>
+            </h:form>
+        </h:body>
+</html>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Caissedepret" table="caissedepret" catalog="suiviDette" optimistic-lock="version">
+        <id name="idCaissedepret" type="java.lang.Integer">
+            <column name="id_caissedepret" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="projet" class="Model.Projet" fetch="select">
+            <column name="id_projet" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="datePret" type="date">
+            <column name="date_pret" length="10" not-null="true" />
+        </property>
+        <property name="montantDebloquer" type="long">
+            <column name="montant_debloquer" not-null="true" />
+        </property>
+        <property name="interet" type="long">
+            <column name="interet" not-null="true" />
+        </property>
+        <property name="dateDerniereTranche" type="date">
+            <column name="date_derniere_tranche" length="10" not-null="true" />
+        </property>
+        <property name="penalite" type="long">
+            <column name="penalite" not-null="true" />
+        </property>
+        <property name="delaiDeGrace" type="date">
+            <column name="delai_de_grace" length="10" not-null="true" />
+        </property>
+        <set name="tranches" table="tranche" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_caissepret" not-null="true" />
+            </key>
+            <one-to-many class="Model.Tranche" />
+        </set>
+        <set name="dettes" table="dette" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_caissedepret" unique="true" />
+            </key>
+            <one-to-many class="Model.Dette" />
+        </set>
+        <set name="conventions" table="convention" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_caisse" />
+            </key>
+            <one-to-many class="Model.Convention" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Gestion de Facture</title>
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <p:panel style="width:  90%;background: #e27c16; border-color: #AFAFAF">
+                <h:panelGroup>
+                    <p:commandLink action="#{redirectBean.versajouterFacture()}" title="Création d'une Facture">
+                        <p:graphicImage value="images/create.png" />
+                    </p:commandLink>
+                </h:panelGroup>
+
+                <p:dataTable value="#{factureBean.listerFactureBean()}"
+                             style="margin-bottom:20px"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5,10,20,50"
+                             scrollable="true"
+                             scrollWidth="1090"
+                             scrollHeight="200" 
+                             scrollRows="150"
+                             editable="true" draggableRows="true"  draggableColumns="true"  paginator="true" rows="10" var="facturel">
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste des factures</b> 
+                    </f:facet>
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Identifiant" width="100" sortBy="#{facturel.idFacture}" filterBy="#{facturel.idFacture}" >
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16"  value="#{facturel.idFacture}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" width="100" headerText="Numero Facture" filterBy="#{facturel.numFacture}" sortBy="#{facturel.numFacture}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{facturel.numFacture}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Montant Facture" width="100" sortBy="#{facturel.montantFacture}" filterBy="#{facturel.montantFacture}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{facturel.montantFacture}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Date D'arrivé" width="100" sortBy="#{facturel.dateArrive}" filterBy="#{facturel.dateArrive}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{facturel.dateArrive}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Date de Paiement" width="100" sortBy="#{facturel.datePaiement}" filterBy="#{facturel.datePaiement}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{facturel.datePaiement}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Detail" width="100">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{facturel.detail}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Projet" width="100">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{factureBean.afficherProjetFactureBean(facturel)}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Société" width="100">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{factureBean.afficherSocieteFactureBean(facturel)}"/>
+                    </p:column>
+
+                    <!--button consulter facture -->
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink action="#{factureBean.detailFatureBean(facturel)}" title="consulter une facture">
+                            <p:graphicImage value="images/view.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <!--button editer facture -->
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink  action="#{factureBean.editerFactureBean(facturel)}" title="modifier une facture" >
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+
+                    </p:column>
+
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink onclick="PF('ss').show()" >
+                            <p:graphicImage value="images/delete.png" width="17" title="La suppression d'une facture est destinée uniquement à l'administrateur sous l'approbation du directeur municipal"/>
+                        </p:commandLink>
+                        <p:confirmDialog width="450" style="color: red"  
+                                         header="Confirmation" severity="alert" widgetVar="ss">
+                            <f:facet  name="header">
+                                <b style="color: tomato">Confirmation</b> 
+                            </f:facet>
+                            <f:facet  name="message">
+                                <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                            </f:facet>
+                            <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.verslisterFacture()}" type="button"/>
+                        </p:confirmDialog> 
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Detail du Projet</title>
+    </h:head>
+  <h:body style="background-color: #4F7A4F ">
+        <h:form>
+
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto;width: 100%" >
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Détails du Projet</b> 
+                </f:facet>
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+
+                    <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto;width: 100%"  >
+                        <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                            <p:outputLabel value="ID :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.projet.idProjet}" style="color: #ffffff"/>
+
+
+                            <p:outputLabel value="Nom du projet :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.projet.nomProjet}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Date realisation:" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.projet.dateRealisation}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Montant alloué :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.projet.montantAlloue}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Budget : " style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.typeBudget(detailProjetBean.projet)}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Annee Budgetaire : " style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailProjetBean.anneeBudget(detailProjetBean.projet)}" style="color: #ffffff"/>
+                            <p:outputLabel/>
+                        </h:panelGrid>
+                    </p:panel>
+                    <!--Creation de la caisse de prêt-->
+                    <p:panel style="width: 100%;background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                        <p:outputLabel value="Caisse de Prêt :" style="color: #ffffff;font-size: 40px"/><br/>
+                        <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="ajouter Prêt"  action="#{caisseDePretBean.recupererProjet(detailProjetBean.projet)}" title="Ajouter un prêt au projet "/>   
+                        <h:panelGrid columns="2"  >
+                            <p:outputLabel style="color: #ffffff" value="Date de prêt : " />
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.datePret()}"/>
+
+                            <p:outputLabel style="color: #ffffff" value="Delai de Grâce : "/>
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.delaiDeGrace()}"/>
+
+                            <p:outputLabel style="color: #ffffff" value="Montant Financé : "/>
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.montantDebloquer()}"/>
+
+                            <p:outputLabel style="color: #ffffff" value="Interêt : "/>
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.interet()}"/>
+
+                            <p:outputLabel style="color: #ffffff" value="Pénalité : "/>
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.penalite()}"/>
+
+                            <p:outputLabel style="color: #ffffff" value="Date dernère Tranche : "/>
+                            <p:outputLabel style="color: #ffffff" value="#{detailProjetBean.dateDerniereTranche()}"/>
+                            <center>
+                            <p:commandButton style="background:#ffffff ;color: #e27c16;border-radius: 20px" value="modifier" action="#{caisseDePretBean.recupererPret(detailProjetBean.projet)}" title="Modifier les données de la caisse de prête pour ce projet"/>
+                            </center>
+                        </h:panelGrid>
+                        <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto;width: 100%"  >
+
+                            <h:panelGrid columns="2">
+                                <p:outputLabel style="color: #ffffff;font-size: 28px" value="Dette :    "/>
+                                <p:outputLabel style="color: #ffffff;font-size: 30px" value="#{detailProjetBean.dettePret()} DT"/>
+                            </h:panelGrid>
+                            <center>
+                            <p:commandButton style="background:#ffffff ;color: #e27c16;border-radius: 20px" value="Plus de detail" action="#{detailDetteBean.recupererProjet(detailProjetBean.projet)}" title="voir plus de detail ou modifier la dette"/>
+                            </center>
+                        </p:panel>
+                    </p:panel>
+
+
+
+                    <!--Tranches-->
+                    <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                        <h:panelGrid>
+
+                            <p:outputLabel  value="Tranches :" style="color: #ffffff;font-size: 40px"/>
+                            <br/>
+                            <p:commandButton style="background:#ffffff ;color: #e27c16;border-radius: 20px" value="Nouvelle Tranche" title="Ajouter une nouvelle tranche" action="#{trancheBean.recupererProjet(detailProjetBean.projet)}"/>
+
+                            <p:dataTable  value="#{detailProjetBean.tranches()}" var="tranchel"
+                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                          rowsPerPageTemplate="1,2,3,5,10,20,50"
+                                          scrollable="true"
+                                          scrollWidth="1090"
+                                          scrollHeight="200" 
+                                          scrollRows="150"
+                                          editable="true" draggableRows="true"  draggableColumns="true"  paginator="true" rows="10" >                  
+
+                                <f:facet  name="header">
+                                    <b style="color: #e27c16">Les tranches</b> 
+                                </f:facet>
+                                <p:column width="70" style="background:#ffffff ;color: #e27c16" headerText="Numero">
+                                    <p:outputLabel style="background:#ffffff ;color: #e27c16" value="#{tranchel.numTranche}"/>
+                                </p:column>
+
+                                <p:column width="70" style="background:#ffffff ;color: #e27c16" headerText="Montant">
+                                    <p:outputLabel style="background:#ffffff ;color: #e27c16" value="#{tranchel.montantTranche}"/>
+                                </p:column>
+
+                                <p:column width="70" style="background:#ffffff ;color: #e27c16" headerText="Date arrivée">
+                                    <p:outputLabel style="background:#ffffff ;color: #e27c16" value="#{tranchel.dateArriveTranche}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:panelGrid>
+                <p:commandButton style="background:#ffffff ;color: #e27c16;border-radius: 20px" value="Retour à la liste de Projet" action="listerProjet?faces-redirect=true" />
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Suvis de dette</title>
+    </h:head>
+    
+    <h:body>
+        <h:form>
+            <p:panel style="background: #e27c16" >
+                <f:facet  name="header">
+                    <b style="color: #e27c16">Modification d'un Prêt</b> 
+                </f:facet>
+            <h:panelGrid columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                
+                <p:outputLabel style="color: #ffffff" value="Projet : "/>
+                <p:outputLabel style="color: #ffffff" value="#{caisseDePretBean.projet.nomProjet}"/>
+                
+                 <p:outputLabel style="color: #ffffff" value="Date de prêt : "/>
+                <p:calendar style="color: #e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.datePret}" pattern="dd/MM/yyyy" required="true" />
+                
+                <p:outputLabel style="color: #ffffff" value="Montant prêté : " />
+                <p:inputText style="color: #e27c16" value="#{caisseDePretBean.caissedepret.montantDebloquer}"
+                                                                            required="true"  size="20"/>
+                
+                <p:outputLabel style="color: #ffffff" value="Date dernière tranche : "/>
+                <p:calendar style="color: #e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.dateDerniereTranche}" pattern="dd/MM/yyyy" required="true" />
+                
+                 <p:outputLabel style="color: #ffffff" value="Delai de Grâce : "/>
+                <p:calendar style="color: #e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.delaiDeGrace}" pattern="dd/MM/yyyy" required="true" />
+  
+
+                
+                <p:outputLabel style="color: #ffffff" value="interet : "/>
+                <p:inputText style="color: #e27c16" value="#{caisseDePretBean.caissedepret.interet}"
+                                                             required="true"  size="20" />
+                  
+                <p:outputLabel style="color: #ffffff" value="Penalité : " />
+                <p:inputText style="color: #e27c16" value="#{caisseDePretBean.caissedepret.penalite}" required="true"/>
+                     
+                <p:commandButton style="background: #ffffff;color: #e27c16"  value="Enregistrer" action="#{caisseDePretBean.modifierPret()}"/> 
+                <p:commandButton style="background: #ffffff;color: #e27c16" value="Retour" action="#{redirectBean.versdetailProjet()}"/>
+            </h:panelGrid>
+            </p:panel>
+            
+        </h:form>
+        
+    </h:body>
+</html>
+

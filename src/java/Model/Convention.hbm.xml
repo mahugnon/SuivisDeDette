@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Convention" table="convention" catalog="suiviDette" optimistic-lock="version">
+        <id name="idConvention" type="java.lang.Integer">
+            <column name="id_convention" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="caissedepret" class="Model.Caissedepret" fetch="select">
+            <column name="id_caisse" />
+        </many-to-one>
+        <many-to-one name="dette" class="Model.Dette" fetch="select">
+            <column name="id_dette" unique="true" />
+        </many-to-one>
+        <many-to-one name="societe" class="Model.Societe" fetch="select">
+            <column name="id_societe" unique="true" />
+        </many-to-one>
+        <property name="dateAjout" type="date">
+            <column name="date_ajout" length="10" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="20" not-null="true" />
+        </property>
+        <set name="echeances" table="echeance" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_convention" not-null="true" />
+            </key>
+            <one-to-many class="Model.Echeance" />
+        </set>
+    </class>
+</hibernate-mapping>

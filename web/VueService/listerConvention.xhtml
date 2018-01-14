@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="formConvention">
+            <p:panel   style="width:  80%;background: #e27c16; border-color: #AFAFAF;width:  80%" >
+                <p:dataTable value="#{conventionBean.listerConventionBean()}" var="conventionl"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5"
+                             scrollable="true"
+                             scrollWidth="1000"
+                             scrollHeight="200"
+                             scrollRows="100"
+                             editable="true" draggableRows="true"  draggableColumns="true" paginator="true" rows="10" style="margin-bottom:20px"  >
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste des conventions</b> 
+                    </f:facet>
+                    <p:column style="background: #ffffff;color: #e27c16" headerText="ID" >
+
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{conventionl.idConvention}"/>
+                    </p:column>
+
+                    
+                    <p:column style="background: #ffffff;color: #e27c16" headerText="Date de Convention" >
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{conventionl.dateAjout}"/>
+                    </p:column>
+                    
+                    <p:column style="background: #ffffff;color: #e27c16" headerText="Société associée" >
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{conventionBean.afficherSociete(conventionl)}"/>
+                    </p:column>
+                    
+                    
+                  
+
+
+                    <p:column>
+                        <p:commandLink  action="#" title="modifier une convention" >
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink onclick="PF('ss').show()" >
+                            <p:graphicImage value="images/delete.png" width="17"/>
+                        </p:commandLink>
+                        <p:confirmDialog width="383" style="color: red"  
+                                         header="Confirmation" severity="alert" widgetVar="ss">
+                            <f:facet  name="header">
+                                <b style="color: tomato">Confirmation</b> 
+                            </f:facet>
+                            <f:facet  name="message">
+                                <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                            </f:facet>
+                            <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.verslisterConvention()}" type="button"/>
+                        </p:confirmDialog> 
+                    </p:column>
+                </p:dataTable>
+
+
+                <!-- consulter convention-->
+                <p:dialog header="Consultation de Conevntion" widgetVar="cd" resizable="false" id="carDlg"
+                          showEffect="fade" hideEffect="explode" modal="true">
+                    <h:panelGrid id="voir" columns="2" cellpadding="4" style="margin:0 auto;" > 
+                        <p:outputLabel value="ID :"/>
+                        <h:outputText value="#{conventionBean.convention.idConvention}" style="font-weight:bold" />
+
+                        <p:outputLabel value=" :"/>
+                        <h:outputText value="#{conventionBean.convention.dateAjout}" style="font-weight:bold"/>
+
+                        <p:commandButton value="retour" onclick="PF('cd').hide()" />
+
+                    </h:panelGrid>
+                </p:dialog>     
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

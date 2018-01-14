@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            
+            <p:dataTable id="societes" var="societe" value="#{bilanbean.societes}"
+                         paginator="true" rows="3"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="1,2,3,5">
+             </p:dataTable>
+            
+            <p:column headerText="Nom Société" style="width:100px" sortBy="#{societe.nomSociete}" filterBy="#{societe.nomSociete}">
+                    <h:outputText value="#{societe.nomSociete}"/>
+                </p:column>
+            
+            <p:column headerText="Dette Total" style="width:100px" sortBy="#{bilanbean.MontantTotalDette(societe)}" filterBy="#{bilanbean.MontantTotalDette(societe)}">
+                    <h:outputText value="#{bilanbean.MontantTotalDette(societe)}"/>
+                </p:column>
+            
+            <p:column headerText="Dette Payer" style="width:100px" sortBy="#{bilanbean.MontantPayeDette(societe)}" filterBy="#{bilanbean.MontantPayeDette(societe)}">
+                <h:outputText value="#{bilanbean.MontantPayeDette(societe)}"/>
+                </p:column>
+            
+            <p:column headerText="Dette Restant" style="width:100px" sortBy="#{bilanbean.MontantRestantDette(societe)}" filterBy="#{bilanbean.MontantRestantDette(societe)}">
+                <h:outputText value="#{bilanbean.MontantRestantDette(societe)}"/>
+                </p:column>
+        </h:form>
+            
+    </h:body>
+</html>
+

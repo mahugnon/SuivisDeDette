@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:tabView style="color: #e27c16" dynamic="true" cache="true">
+                
+                <p:tab>
+                <f:facet  name="title">
+                    <b style="color: #e27c16">Liste de projets</b> 
+                </f:facet>
+                <p:panel style="height:80%;width: 80%;background: #e27c16; border-color: #AFAFAF">
+                    <!-- Button creation projet -->
+                    <h:panelGroup>
+
+                        <p:commandLink  action="#{redirectBean.verscreationProjet()}"  title="Création d'un projet">
+                            <p:graphicImage value="images/create.png"/>
+                        </p:commandLink>
+
+                    </h:panelGroup>
+
+                    <p:dataTable value="#{projetBean.listerProjetBean()}"
+                                 scrollable="true" scrollHeight="150"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="1,2,3,5,6,8,10" var="projetl"
+                                 editable="true" draggableRows="true"  draggableColumns="true"   paginator="true" rows="10">
+                        <f:facet  name="header">
+                            <b style="background: #cccccf ;color: #e27c16">Liste de projets</b> 
+                        </f:facet>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="ID" width="100" sortBy="#{projetl.idProjet}" filterBy="#{projetl.idProjet}"  >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{projetl.idProjet}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Nom Projet" width="100" sortBy="#{projetl.nomProjet}" filterBy="#{projetl.nomProjet}" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{projetl.nomProjet}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Date Réalisation" width="100" sortBy="#{projetl.dateRealisation}" filterBy="#{projetl.dateRealisation}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{projetl.dateRealisation}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Montant Alloué" width="100" sortBy="#{projetl.montantAlloue}" filterBy="#{projetl.montantAlloue}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{projetl.montantAlloue} DT"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" width="100" headerText=" Budget" sortBy="#{projetl.nomProjet}" filterBy="#{projetl.nomProjet}" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{projetBean.afficherLigneProjetBean(projetl)}"/>.
+                        </p:column>
+
+
+                        <!-- Button consultation -->
+                        <p:column width="15">
+                            <p:commandLink  action="#{detailProjetBean.recupererProjet(projetl)}" title="consulter projet">
+                                <p:graphicImage value="images/view.png" width="17"/>
+
+                            </p:commandLink>
+                        </p:column>
+                        <!-- buton modifier-->
+                        <p:column width="15">
+                            <p:commandLink action="#{projetBean.editerProjetBean(projetl)}" >
+                                <p:graphicImage value="images/edit.png" width="17"/>
+                            </p:commandLink>
+                        </p:column>
+
+                        <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                            <p:commandLink onclick="PF('ss').show()" >
+                                <p:graphicImage value="images/delete.png" width="17" title="La suppression d'un projet est destinée uniquement à l'administrateur sous l'approbation du directeur municipal"/>
+                            </p:commandLink>
+                            <p:confirmDialog width="450" style="color: red"  
+                                             header="Confirmation" severity="alert" widgetVar="ss">
+                                <f:facet  name="header">
+                                    <b style="color: tomato">Confirmation</b> 
+                                </f:facet>
+                                <f:facet  name="message">
+                                    <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                                </f:facet>
+                                <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.verslisterProjet()}" type="button"/>
+                            </p:confirmDialog> 
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                </p:tab>
+            <!-- Tableau de caisse de prêt-->
+            <p:tab >
+                <f:facet name="title">
+                    <b style="color: #e27c16">Liste de Prêts</b> 
+                </f:facet>
+                <p:panel style="height:80%;width: 80%;background: #e27c16; border-color: #AFAFAF">
+
+                    <p:dataTable value="#{caisseDePretBean.ListerPret()}"
+                                 scrollable="true" scrollHeight="150"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="1,2,3,5,6,8,10" var="pretl"
+                                 editable="true" draggableRows="true" 
+                                 draggableColumns="true"   paginator="true" rows="10" >
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="ID Prêt" width="70" sortBy="#{pretl.idCaissedepret}" filterBy="#{pretl.idCaissedepret}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.idCaissedepret}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Montant Debloque" width="70" sortBy="#{pretl.montantDebloquer}" filterBy="#{pretl.montantDebloquer}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.montantDebloquer}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Interêt" width="70" sortBy="#{pretl.interet}" filterBy="#{pretl.interet}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.interet}%" />
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Date Prêt" width="70" sortBy="#{pretl.datePret}" filterBy="#{pretl.datePret}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.datePret}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Delai de Grâce" width="70" sortBy="#{pretl.delaiDeGrace}" filterBy="#{pretl.delaiDeGrace}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.delaiDeGrace}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Penalité" width="70" sortBy="#{pretl.penalite}" filterBy="#{pretl.penalite}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{pretl.penalite}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Nom Projet" width="70">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{caisseDePretBean.recupereProjet(pretl)}"/>
+                        </p:column>
+
+                        <!--Button pour afficher les tranche-->
+
+                    </p:dataTable>
+
+                </p:panel>
+            </p:tab>
+            </p:tabView>
+            
+        </h:form>
+    </h:body>
+</html>
+

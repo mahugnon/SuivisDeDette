@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Bilan dettes par année</title>
+    </h:head>
+    <h:body style="background-color: #E8C656">
+        <h:form>
+            <center>
+                <p:panel   style="width:  85%;background: #e27c16; border-color: #AFAFAF;border-radius: 30px" >
+
+                    <p:dataTable value="#{bilanBean.bilan()}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                                 rowsPerPageTemplate="1,2,3,5"
+                                 scrollable="true"
+                                 scrollWidth="1000"
+                                 scrollHeight="150"
+                                 scrollRows="100"
+                                 var="bilanl" 
+                                 editable="true" draggableRows="true"  id="bilan" draggableColumns="true"  paginator="true" rows="10" style="margin-bottom:20px" >
+                        <f:facet name="header">
+                            <b style="background: #cccccf ;color: #e27c16">Bilan des dettes par année Budgétaire</b> 
+                            <h:commandLink value="imprimer">
+                                <p:dataExporter type="pdf" target="bilan" fileName="BilanDesDettesParAnneeBudgetaire"/>
+                            </h:commandLink>
+                        </f:facet>
+
+                        <p:column headerText="Année budgétaire" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{bilanl.annee}" filterBy="#{bilanl.annee}">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{bilanl.annee}"/>
+                        </p:column>
+
+                        <p:column  headerText="Montant budgetaire" style="background: #ffffff ;color: #e27c16" width="70" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{bilanl.montant}"/>
+                        </p:column>
+
+                        <p:column headerText="Dette restante" style="background: #ffffff ;color: #e27c16" width="70" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{bilanl.dette}"/>
+                        </p:column>
+
+                        <p:column headerText="Dette payée" style="background: #ffffff ;color: #e27c16" width="70" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{bilanl.dettePayer}"/>
+                        </p:column>
+
+                        <p:column headerText="VOIR BILAN GRAPHIQUE" style="background: #ffffff ;color: #e27c16" width="40">
+                            <p:commandButton style="background: #ffffff ;color: #e27c16;border-radius: 20px" value="chart" icon="ui-icon-extlink" action="#{bilanBean.recupererBilan(bilanl)}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+
+
+                    <p:panel style="border-radius: 30px">
+                        <p:chart style="background: #ffffff ;color: #e27c16;border-radius: 20px" type="bar" model="#{bilanBean.horizontalBarChartModel}"/>
+                    </p:panel>
+
+                    <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Retour à l'accueil" action="#{redirectBean.versAcueil()}"/>
+                    <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Lister les dettes" action="#{redirectBean.versListerDette()}"/>
+
+
+                </p:panel>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

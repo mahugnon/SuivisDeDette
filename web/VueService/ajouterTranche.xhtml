@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+          
+        <h:form>
+
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Ajouter Tranche</b> 
+                </f:facet>
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                    
+                    <p:outputLabel style="color:#ffffff" value="Projet:"/>
+                    <p:outputLabel style="color:#ffffff" value="#{trancheBean.projet.nomProjet}"/>
+                    
+                    <p:outputLabel style="color:#ffffff" value="Numero Prêt :"/>
+                    <p:outputLabel style="color:#ffffff" value="#{trancheBean.caissedepret.idCaissedepret}"/>
+                    
+                     <p:outputLabel style="color:#ffffff" value=" Date Pret :"/>
+                     <p:outputLabel style="color:#ffffff" value="#{trancheBean.caissedepret.datePret}"/>
+                     
+                      <p:outputLabel style="color:#ffffff" value=" Numero de Tranche :"/>
+                      <p:inputText style="color:#e27c16" value="#{trancheBean.tranche.numTranche}"/>
+                     
+                       <p:outputLabel style="color:#ffffff" value=" Mantant de la tranche :"/>
+                       <p:inputText style="color:#e27c16" value="#{trancheBean.tranche.montantTranche}"/>
+                     
+                      
+                      <p:outputLabel style="color:#ffffff" value="Date arrivée"/>
+                       <p:calendar style="background: #ffffff;color:#e27c16" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                    timeZone="Europe/Paris" 
+                                    value="#{trancheBean.tranche.dateArriveTranche}" pattern="dd/MM/yyyy" placeholder="date d'ajout"/>
+                      
+                      
+                    
+                       <p:commandButton style="background: #ffffff;color:#e27c16" value="Enregistrer" action="#{trancheBean.ajouterTranche()}"/>
+                       <p:commandButton style="background: #ffffff;color:#e27c16" value="Retour" action="#{redirectBean.versdetailProjet()}"/>
+                    
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        
+        
+    </h:body>
+</html>
+

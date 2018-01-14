@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet  name="style.css"/>
+    </h:head>
+    <h:body style="font: black">
+        <h:form>
+            <p:layout style="min-width:1000px;min-height:1000px;color: white;background-color: black">
+                <p:layoutUnit style="background-color: black" position="west" resizable="true" size="300" minSize="200" maxSize="300">
+
+                </p:layoutUnit>
+
+                <!--La partie du centre de la page (corps de la page)-->
+                <p:layoutUnit style="background-color: black" position="center">
+
+                    <p:megaMenu id="menus" style="margin-top:20px;width:  100%;background: #e27c16; border-color: #AFAFAF;color: white">
+
+                        <p:submenu label="SOCIETE" icon="ui-icon-check" style="color: white">
+                            <p:column style="background: #e27c16; border-color: #AFAFAF;color: white">
+                                <p:submenu  label="Gestion des sociétés" style="background: #e27c16; border-color: #AFAFAF;color: white"/>
+                                <p:submenu>
+                                    <p:menuitem value="Liste de sociétés privées" action="#{redirectBean.verslisterSociete()}" style="background: #e27c16; border-color: #AFAFAF;color: white;color: white"  />
+                                    <p:menuitem  value="Société et dettes associée" action="#{redirectBean.versVoirDetteSociete()}" style="background: #e27c16; border-color: #AFAFAF;color: white" />
+                                    <p:menuitem value="Factures liées aux sociétés" action="#{redirectBean.verslisterFacture()}" style="background: #e27c16; border-color: #AFAFAF;color: white"  />
+                                    <p:menuitem value="modification des données sur Société" action="#{redirectBean.verslisterFacture()}"  style="background: #e27c16; border-color: #AFAFAF;color: white" />
+                                </p:submenu>
+                            </p:column>
+                        </p:submenu>
+
+                                <p:submenu style="color: white" label="PROJET" icon="ui-icon-check">
+                            <p:column width="350">
+                                <p:submenu style="background: #e27c16; border-color: #AFAFAF;color: white"  label="Gestion des Projets"/>
+                                <p:submenu>
+                                    <p:menuitem style="background: #e27c16; border-color: #AFAFAF;color: white" value="Liste de projets" action="#" />
+                                    <p:menuitem style="background: #e27c16; border-color: #AFAFAF;color: white" value="Modification des projets" action="#" />
+                                </p:submenu>
+                            </p:column>
+                        </p:submenu>
+
+                        <p:submenu style="color: white" label="CAISSE DE PRET" icon="ui-icon-check">
+                            <p:column width="350">
+                                <p:submenu style="background: #e27c16; border-color: #AFAFAF;color: white"  label="Gestion des Prêts"/>
+                                <p:submenu>
+                                    <p:menuitem value="Liste de caisse de prêt" action="#" style="background: #e27c16; border-color: #AFAFAF;color: white"/>
+                                    <p:menuitem value="Les prêts associés aux sociétés" action="#" style="background: #e27c16; border-color: #AFAFAF;color: white"/>
+                                    <p:menuitem value="Les prêts associés aux projets" action="#" style="background: #e27c16; border-color: #AFAFAF;color: white"/>
+                                    <p:menuitem value="Les tranches de prêt" action="#" style="background: #e27c16; border-color: #AFAFAF;color: white"/>
+                                </p:submenu>
+                            </p:column>
+                        </p:submenu>
+                    </p:megaMenu>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:form>
+    </h:body>
+</html>
+

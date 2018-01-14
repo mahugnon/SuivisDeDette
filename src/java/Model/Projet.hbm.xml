@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Projet" table="projet" catalog="suiviDette" optimistic-lock="version">
+        <id name="idProjet" type="java.lang.Integer">
+            <column name="id_projet" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="lignebudgetaire" class="Model.Lignebudgetaire" fetch="select">
+            <column name="id_budget" not-null="true" />
+        </many-to-one>
+        <property name="nomProjet" type="string">
+            <column name="nom_projet" length="55" not-null="true" unique="true" />
+        </property>
+        <property name="dateRealisation" type="date">
+            <column name="date_realisation" length="10" not-null="true" />
+        </property>
+        <property name="montantAlloue" type="long">
+            <column name="montant_alloue" not-null="true" />
+        </property>
+        <property name="evolution" type="double">
+            <column name="evolution" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="factures" table="facture" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_projet" not-null="true" />
+            </key>
+            <one-to-many class="Model.Facture" />
+        </set>
+        <set name="caissedeprets" table="caissedepret" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_projet" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="Model.Caissedepret" />
+        </set>
+    </class>
+</hibernate-mapping>

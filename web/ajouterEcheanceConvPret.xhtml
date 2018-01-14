@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ajouter échéance</title>
+    </h:head>
+     <h:body style="background-color: #4F7A4F ">
+        <h:form>
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Modifier une échéance</b> 
+                </f:facet>
+
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                    <p:outputLabel value="Convention : " style="color: #ffffff"/>
+                    <p:outputLabel value="#{echeanceBean.convention.type}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Montant echeance : " style="color: #ffffff"/>
+                    <p:inputText style="color: #e27c16;border-radius: 8px" value="#{echeanceBean.echeance.montantEcheance}"/>
+
+                    <p:outputLabel value="Date création d'échéance : " style="color: #ffffff"/>
+                    <p:calendar required="true" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                timeZone="Europe/Paris" 
+                                style="background: #ffffff;color:#e27c16;border-radius: 8px"
+                                value="#{echeanceBean.echeance.dateCreation}" pattern="dd/MM/yyyy" />
+
+                    <p:outputLabel value="Date de paiement d'échéance : " style="color: #ffffff"/>
+                    <p:calendar required="true" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                timeZone="Europe/Paris" 
+                                style="background: #ffffff;color:#e27c16;border-radius: 8px"
+                                value="#{echeanceBean.echeance.datePaiement}" pattern="dd/MM/yyyy" />
+
+                    <p:commandButton style="color: #e27c16; background: #ffffff;border-radius: 20px"  value="Enregistrer"  action="#{echeanceBean.ajouterEcheanceConvPret()}" />
+                    <p:commandButton style="color: #e27c16; background: #ffffff;border-radius: 20px" value="Retour" action="/detailDette?faces-redirect=true"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

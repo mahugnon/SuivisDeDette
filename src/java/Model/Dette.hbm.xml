@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Dette" table="dette" catalog="suiviDette" optimistic-lock="version">
+        <id name="idDette" type="java.lang.Integer">
+            <column name="id_dette" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="caissedepret" class="Model.Caissedepret" fetch="select">
+            <column name="id_caissedepret" unique="true" />
+        </many-to-one>
+        <many-to-one name="societe" class="Model.Societe" fetch="select">
+            <column name="id_societe" unique="true" />
+        </many-to-one>
+        <property name="detteBrute" type="long">
+            <column name="dette_brute" not-null="true" />
+        </property>
+        <property name="montantPaye" type="long">
+            <column name="montantPaye" not-null="true" />
+        </property>
+        <property name="montantRestant" type="long">
+            <column name="montant_restant" not-null="true" />
+        </property>
+        <property name="etat" type="string">
+            <column name="etat" length="20" not-null="true" />
+        </property>
+        <property name="dateCreation" type="date">
+            <column name="`date creation`" length="10" not-null="true" />
+        </property>
+        <property name="coleur" type="string">
+            <column name="coleur" length="20" />
+        </property>
+        <property name="annee" type="int">
+            <column name="annee" not-null="true" />
+        </property>
+        <set name="conventions" table="convention" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_dette" unique="true" />
+            </key>
+            <one-to-many class="Model.Convention" />
+        </set>
+    </class>
+</hibernate-mapping>

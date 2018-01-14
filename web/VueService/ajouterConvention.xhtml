@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ajout de convention</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto"  >
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Ajouter convention</b> 
+                </f:facet>
+                
+                <h:panelGrid  columns="2" cellpadding="4"  cellspacing="3">
+                    
+                    <p:outputLabel style="color:#ffffff" value="Societe :"/>
+                    <p:outputLabel style="color:#ffffff" value="#{conventionBean.societe.nomSociete}"/>
+                    
+                    <p:outputLabel style="color:#ffffff" value="Dette :"/>
+                    <p:outputLabel style="color:#ffffff" value="#{conventionBean.detteRestant(conventionBean.societe)}"/>
+                    
+                     <p:outputLabel style="color:#ffffff" value=" état Dette :"/>
+                     <p:outputLabel style="color:#ffffff" value="#{conventionBean.EtatDette(conventionBean.societe)}"/>
+                     
+                      <p:outputLabel style="color:#ffffff" value="Date ajout"/>
+                       <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                    timeZone="Europe/Paris" 
+                                    style="background: #ffffff;color:#e27c16"
+                                    value="#{conventionBean.convention.dateAjout}" pattern="dd/MM/yyyy" placeholder="date d'ajout"/>
+                      
+                       <p:outputLabel style="color:#ffffff" value="Type de convention"/>
+                       <h:selectOneRadio style="color:#ffffff" layout="pageDirection" value="#{conventionBean.convention.type}">
+                           <f:selectItem  itemLabel="Interne" itemValue="Interne"/>
+                           <f:selectItem itemLabel="Externe" itemValue="Externe"/>
+                       </h:selectOneRadio>
+                    
+                       <p:commandButton style="background: #ffffff;color:#e27c16" value="Enregistrer" action="#{conventionBean.ajouterConvention(conventionBean.societe)}"/>
+                       <p:commandButton style="background: #ffffff;color:#e27c16" value="Retour" action="#{redirectBean.versDetailSociete()}"/>
+                    
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        
+    </h:body>
+</html>
+

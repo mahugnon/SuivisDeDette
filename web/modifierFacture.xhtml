@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+   <h:body style="background-color: #4F7A4F ">
+        <h:form>
+            <p:growl id="message" />
+             <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto" >
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Modifier une facture</b> 
+                </f:facet>
+                 <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                <p:outputLabel value="Numero Facture :" style="color: #ffffff"/>
+                <p:inputText style="border-radius: 8px" value="#{factureBean.facture.numFacture}" required="true" placeholder="entrer numéro facture"/>
+                <p:outputLabel style="color: #ffffff" value="Projet :"/>
+                <h:panelGroup>
+                    <p:selectOneMenu  style="color: #e27c16;width:250px;border-radius: 8px" id="projet" value="#{factureBean.nomProjet}" var="projet_var"
+                                     filterMatchMode="startsWith" effect="fade" filter="true">
+                        <f:selectItem  itemLabel="Selectionner Projet" itemValue=""/>
+                        <f:selectItems value="#{factureBean.listprojet}" var="projetItem_var"
+                                       itemLabel="#{projetItem_var.nomProjet}" itemValue="#{projetItem_var.nomProjet}"/>
+                    </p:selectOneMenu>
+              
+                </h:panelGroup>
+                <p:outputLabel style="color: #ffffff" for="societe" value="Societe :"/>
+                <h:panelGroup>
+                    <p:selectOneMenu style="color: #e27c16;width:250px;border-radius: 8px" id="societe" value="#{factureBean.nomSociete}" var="societe_var"
+                                     filterMatchMode="startsWith" effect="fade" filter="true">
+                        <f:selectItem itemLabel="Selectionner Societe" itemValue=""/>
+                        <f:selectItems value="#{factureBean.listsociete}" var="societeItem_var" itemLabel="#{societeItem_var.nomSociete}"
+                                       itemValue="#{societeItem_var.nomSociete}"/>
+                    </p:selectOneMenu>
+           
+                </h:panelGroup>
+                <p:outputLabel style="color: #ffffff" value="Date d'arrivé Facture :"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{factureBean.facture.dateArrive}" pattern="dd/MM/yyyy" placeholder="entrer date d'arrivé"/>
+                <p:outputLabel style="color: #ffffff" value="Date Paiement  :"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{factureBean.facture.datePaiement}" pattern="dd/MM/yyyy" placeholder="entrer date paiement" />
+                <p:outputLabel style="color: #ffffff" value="Montant Facture :"/>
+                 <p:inputText style="color: #e27c16;border-radius: 8px" id="montantfacture" value="#{factureBean.facture.montantFacture}" size="20" required="true">
+                        <f:convertNumber minFractionDigits="2" />
+                    </p:inputText>
+                <p:outputLabel style="color: #ffffff" value="Detail facture  :"/>
+                <p:inputTextarea style="color: #e27c16;border-radius: 8px" value="#{factureBean.facture.detail}" placeholder="entrer detail"/>
+
+                <p:commandButton style="background: #ffffff ;color: #e27c16;border-radius: 20px" value="Enregistrer" action="#{factureBean.enregistrerFactureBean()}" update="message" />
+                <p:commandButton style="background: #ffffff ;color: #e27c16;border-radius: 20px" value="Retour" action="#{redirectBean.verslisterFacture()}" />
+                     </h:panelGrid>
+             </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

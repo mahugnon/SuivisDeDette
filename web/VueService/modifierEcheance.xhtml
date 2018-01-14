@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet  Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel style="background: #de8254; border-color: #AFAFAF;alignment-adjust: auto" header="Modifier une echéance" >
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                    <p:outputLabel value="ID :" />
+                    <p:outputLabel value="#{echeanceBean.echeance.idEcheance}" style="color: #ffffff;" />
+
+                    <p:outputLabel value="Etat echeance :" style="color: #ffffff" />
+                    <p:selectOneRadio value="#{echeanceBean.echeance.etatEcheance}">
+                        <f:selectItem itemLabel="Payé" itemValue="Payé"/>
+                        <f:selectItem itemLabel="Non Payé" itemValue="Non Payé"/>
+                    </p:selectOneRadio>
+                  
+
+                    <p:outputLabel value="Montant echeanc: " style="color: #ffffff" />
+                    <p:inputText value="#{echeanceBean.echeance.montantEcheance}"/>
+                    
+                     <p:outputLabel value="Date Echéance :" style="color: #ffffff" />
+                    <p:calendar required="true" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                timeZone="Europe/Paris" 
+                                value="#{echeanceBean.echeance.dateCreation}" pattern="dd/MM/yyyy" />
+                    
+                    <p:outputLabel value="Date de paiement échéance :" style="color: #ffffff" /> 
+                    <p:calendar required="true" locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                timeZone="Europe/Paris" 
+                                value="#{echeanceBean.echeance.datePaiement}" pattern="dd/MM/yyyy" />
+
+                    <p:commandButton style="color: #ffffff"  value="Enregistrer"  action="#{echeanceBean.modifierEcheancetBean(echeanceBean.echeance)}" />
+                    <p:commandButton style="color: #ffffff"  value="Retour" action="/detailSociete?faces-redirect=true" />
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="message"/>
+            <p:panelGrid  columns="2">
+                <p:outputLabel value="Date de prêt:"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.datePret}" pattern="dd/MM/yyyy" required="true" />
+                <p:outputLabel value="MontantMontant prêter" /><p:inputText value="#{caisseDePretBean.caissedepret.montantDebloquer}"
+                                                                            required="true"  size="20">
+                    <f:convertNumber minFractionDigits="2"/>
+                </p:inputText>
+                <p:outputLabel value="Date dernière tranche:"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.dateDerniereTranche}" pattern="dd/MM/yyyy" required="true" />
+
+                <p:outputLabel value="MontantMontant prêter" /><p:inputText value="#{caisseDePretBean.caissedepret.montantDebloquer}"
+                                                                            required="true"  size="20">
+                    <f:convertNumber minFractionDigits="2"/>
+                </p:inputText>
+                <p:outputLabel value="Delai de Grâce"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            value="#{caisseDePretBean.caissedepret.delaiDeGrace}" pattern="dd/MM/yyyy" required="true" />
+                <p:outputLabel value="Projet" />
+                <p:selectOneMenu id="nombudget" value="#{caisseDePretBean.nomProjet}" var="ligne_var"
+                                 filterMatchMode="startsWith" effect="fade" style="width:250px" filter="true">
+                    <f:selectItem itemLabel="Selectionner le projet" itemValue=""/>
+                    <f:selectItems value="#{caisseDePretBean.projets}" var="projetItem_var"
+                                   itemLabel="#{projetItem_var.nomProjet}" itemValue="#{projetItem_var.nomProjet}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="interet"/><p:inputText value="#{caisseDePretBean.caissedepret.interet}"
+                                                             required="true"  size="20">
+                    <f:convertNumber maxIntegerDigits="3" integerOnly="100"/>
+                </p:inputText>
+                <p:outputLabel value="Penalité" /><p:inputText value="#{caisseDePretBean.caissedepret.penalite}"
+                                                               required="true"  size="20">
+                    <f:convertNumber minFractionDigits="2"/>
+                </p:inputText>
+                <p:commandButton value="Enregistrer" action="#{caisseDePretBean.ajouterPret()}" update="message"/>
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

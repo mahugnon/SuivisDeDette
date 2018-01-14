@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Lignebudgetaire" table="lignebudgetaire" catalog="suiviDette" optimistic-lock="version">
+        <id name="idBudget" type="java.lang.Integer">
+            <column name="id_budget" />
+            <generator class="identity" />
+        </id>
+        <property name="nomLigne" type="string">
+            <column name="nom_ligne" length="33" not-null="true" />
+        </property>
+        <property name="anneeBudgetaire" type="int">
+            <column name="annee_budgetaire" not-null="true" />
+        </property>
+        <property name="montantBudgetaire" type="long">
+            <column name="montant_budgetaire" not-null="true" />
+        </property>
+        <set name="projets" table="projet" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_budget" not-null="true" />
+            </key>
+            <one-to-many class="Model.Projet" />
+        </set>
+    </class>
+</hibernate-mapping>

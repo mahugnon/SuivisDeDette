@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="background-color: #4F7A4F ">
+        <h:form>
+
+            <p:tabView style="background: #e27c16;color: #e27c16;border-radius: 30px" dynamic="true" cache="true">
+                <p:tab >
+                    <f:facet   name="title">
+                        <b style="color: #e27c16;border-radius: 30px">Détails de la société</b> 
+                    </f:facet>
+
+                    <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto" >
+                        <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                            <p:outputLabel value="ID :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.societe.idSociete}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Société :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.societe.nomSociete}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Adresse Société :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.societe.adresseSociete}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Nature :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.societe.nature}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Contact Société" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.societe.contactSociete}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Montant dette :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.montantDette(detailSocieteBean.societe)}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Montant payé :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.montantPayer(detailSocieteBean.societe)}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Montant restant :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.montantDetteRestant(detailSocieteBean.societe)}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Etat dette :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.etatDette(detailSocieteBean.societe)}" style="color: #ffffff"/>
+
+                            <p:outputLabel value="Année dette :" style="color: #ffffff"/>
+                            <p:outputLabel value="#{detailSocieteBean.anneeDette(detailSocieteBean.societe)}" style="color: #ffffff"/>
+                            
+                            <p:commandButton style="background: #ffffff ;color: #e27c16;border-radius: 20px" value="Imprimer" action="#{societeBean.imprimerDetailSociete(detailSocieteBean.societe)}"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton style="color: #e27c16;background: #ffffff;border-radius: 30px" value="Retour à la liste des sociétés" action="#{redirectBean.verslisterSociete()}" />    
+
+                </p:tab>
+
+                <p:tab >
+                    <f:facet  name="title">
+                        <b style="color: #e27c16">Convention associée à la société</b> 
+                    </f:facet>
+                    <p:commandLink action="#{conventionBean.recupererSocieteConvention(detailSocieteBean.societe)}" title="Création d'une convention pour la société">
+                        <p:graphicImage value="images/create.png" width="30"/>
+                    </p:commandLink>
+                    <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto" >
+                        <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                            <!--Creation d'une échéance-->
+                            <h:panelGrid columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                                <p:outputLabel style="color: #ffffff" value="Date Convention :"/>
+                                <p:outputLabel style="color: #ffffff" value="#{detailSocieteBean.dateConventionBean(detailSocieteBean.societe)}"/>
+
+                                <p:outputLabel style="color: #ffffff" value="Type convention :"/>
+                                <p:outputLabel style="color: #ffffff" value="#{detailSocieteBean.typeConventionBean(detailSocieteBean.societe)}"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:commandButton style="color: #e27c16;background: #ffffff;border-radius: 30px" value="Retour à la liste des sociétés" action="#{redirectBean.verslisterSociete()}" />    
+
+                </p:tab>
+
+                <p:tab >
+                    <f:facet   name="title">
+                        <b style="color: #e27c16;border-radius: 30px">Echéance de la société</b> 
+                    </f:facet>
+                    <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto;border-radius: 30px">
+                        <p:commandLink action="#{echeanceBean.recupererConvention(detailSocieteBean.societe)}"
+                                       title="Création d'une échéance pour la société">
+                            <p:graphicImage value="images/create.png" width="30"/>
+                        </p:commandLink>
+                        <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">               
+                            <p:dataTable value="#{detailSocieteBean.listerEcheanceConvBean(detailSocieteBean.societe)}"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="1,2,3,5"
+                                         editable="true" draggableRows="true"  draggableColumns="true"  paginator="true" rows="5" style="margin-bottom:20px" var="echeancel" >
+
+                                <f:facet  name="header">
+                                    <b style="background: #cccccf ;color: #e27c16">Liste des échéances pour la société</b> 
+                                </f:facet>
+                                <p:column style="background: #cccccf ;color: #e27c16" headerText="ID" >
+                                    <p:outputLabel value="#{echeancel.idEcheance}" />
+                                </p:column>
+
+                                <p:column style="background: #cccccf ;color: #e27c16" headerText="Etat echeance">
+                                    <p:outputLabel value="#{echeancel.etatEcheance}" />
+                                </p:column>
+
+                                <p:column style="background: #cccccf ;color: #e27c16" headerText="Montant echeance">
+                                    <p:outputLabel value="#{echeancel.montantEcheance}" />
+                                </p:column>
+
+                                <p:column style="background: #cccccf ;color: #e27c16" headerText="Type convention">
+                                    <p:outputLabel value="#{detailSocieteBean.typeConventionBean(detailSocieteBean.societe)}" />
+                                </p:column>
+
+                                <p:column style="background: #cccccf ;color: #e27c16" headerText="Date convention">
+                                    <p:outputLabel value="#{detailSocieteBean.dateConventionBean(detailSocieteBean.societe)}" />
+                                </p:column>
+
+                                <p:column >
+                                    <p:commandLink action="#{echeanceBean.consulterEcheanceBean(echeancel)}">
+                                        <p:graphicImage value="images/view.png" width="17"/>
+                                    </p:commandLink>
+                                </p:column>      
+
+                                <p:column >
+                                    <p:commandLink action="#{echeanceBean.recupererEcheanceBean(echeancel)}">
+                                        <p:graphicImage value="images/edit.png" width="17"/>
+                                    </p:commandLink>
+                                </p:column>      
+
+                                <p:column width="15" style="background: #cccccf ;color: #e27c16">
+                                    <p:commandLink onclick="PF('ss').show()" >
+                                        <p:graphicImage value="images/delete.png" width="17"/>
+                                    </p:commandLink>
+                                    <p:confirmDialog width="450" style="color: red"  
+                                                     header="Confirmation" severity="alert" widgetVar="ss">
+                                        <f:facet  name="header">
+                                            <b style="color: tomato">Confirmation</b> 
+                                        </f:facet>
+                                        <f:facet  name="message">
+                                            <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                                        </f:facet>
+                                        <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.verslisterSociete()}" type="button"/>
+                                    </p:confirmDialog> 
+                                </p:column>
+
+                            </p:dataTable> 
+                        </h:panelGrid>
+
+                    </p:panel>
+                    <p:commandButton style="color: #e27c16;background: #ffffff;border-radius: 30px" value="Retour à la liste des sociétés" action="#{redirectBean.verslisterSociete()}" />    
+
+                </p:tab>
+
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>
+

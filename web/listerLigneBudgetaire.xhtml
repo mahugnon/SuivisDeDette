@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Liste des lignes budgetaire</title>
+    </h:head>
+    
+    <h:body style="background-color: #4F7A4F ">
+        <h:form>
+            <p:panel style="width:  90%;background: #e27c16; border-color: #AFAFAF;border-radius: 20px">
+                <p:dataTable value="#{ligneBudgetaireBean.listerLigneBudgetaireBean()}" var="lignel"
+                             scrollable="true"
+                             scrollWidth="1100"
+                             scrollHeight="200"
+                             scrollRows="100"
+                             editable="true" draggableRows="true"  draggableColumns="true" paginator="true" rows="10" style="margin-bottom:20px"  >
+
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste de lignes budgétaires</b> 
+                    </f:facet>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="ID">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{lignel.idBudget}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Nom Budgétaire">
+                        <p:outputLabel value="#{lignel.nomLigne}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Montant Budgétaire">
+                        <p:outputLabel value="#{lignel.montantBudgetaire}"/>
+                    </p:column>
+
+                    <p:column style="background: #ffffff ;color: #e27c16" headerText="Année Budgétaire">
+                        <p:outputLabel value="#{lignel.anneeBudgetaire}"/>
+                    </p:column>
+
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink action="#" title="consulter une une ligne budgétaire">
+                            <p:graphicImage value="images/view.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink  action="#" title="modifier une ligne budgétaire" >
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column width="15" style="background: #ffffff ;color: #e27c16">
+                        <p:commandLink onclick="PF('ss').show()" >
+                            <p:graphicImage value="images/delete.png" width="17" title="La suppression d'une ligne budgétaire est destinée uniquement à l'administrateur sous l'approbation du directeur municipal" />
+                        </p:commandLink>
+
+                        <p:confirmDialog width="450" style="color: red"  
+                                         header="Confirmation" severity="alert" widgetVar="ss">
+                            <f:facet  name="header">
+                                <b style="color: tomato">Confirmation</b> 
+                            </f:facet>
+                            <f:facet  name="message">
+                                <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                            </f:facet>
+                            <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="/listerLigneBudgetaire?faces-redirect=true" type="button"/>
+                        </p:confirmDialog> 
+                    </p:column>
+
+                </p:dataTable>
+                <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Retour à l'accueil" action="#{redirectBean.versAcueil()}"/>
+
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

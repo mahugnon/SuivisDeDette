@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Tranche" table="tranche" catalog="suiviDette" optimistic-lock="version">
+        <id name="idTranche" type="java.lang.Integer">
+            <column name="id_tranche" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="caissedepret" class="Model.Caissedepret" fetch="select">
+            <column name="id_caissepret" not-null="true" />
+        </many-to-one>
+        <property name="numTranche" type="int">
+            <column name="num_tranche" not-null="true" />
+        </property>
+        <property name="montantTranche" type="long">
+            <column name="montant_tranche" not-null="true" />
+        </property>
+        <property name="dateArriveTranche" type="date">
+            <column name="date_arrive_tranche" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

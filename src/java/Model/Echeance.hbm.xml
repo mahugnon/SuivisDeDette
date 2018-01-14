@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Echeance" table="echeance" catalog="suiviDette" optimistic-lock="version">
+        <id name="idEcheance" type="java.lang.Integer">
+            <column name="id_echeance" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="convention" class="Model.Convention" fetch="select">
+            <column name="id_convention" not-null="true" />
+        </many-to-one>
+        <property name="dateCreation" type="date">
+            <column name="date_creation" length="10" not-null="true" />
+        </property>
+        <property name="datePaiement" type="date">
+            <column name="date_paiement" length="10" not-null="true" />
+        </property>
+        <property name="montantEcheance" type="long">
+            <column name="montant_echeance" not-null="true" />
+        </property>
+        <property name="etatEcheance" type="string">
+            <column name="etat_echeance" length="20" not-null="true" />
+        </property>
+        <property name="couleur" type="string">
+            <column name="couleur" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

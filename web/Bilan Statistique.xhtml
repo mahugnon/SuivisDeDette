@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Bilan</title>
+    </h:head>
+    <h:body style="background-color: #4F7A4F ">
+        <h:form>
+            <p:panel style="width:  80%;background: #e27c16; border-color: #AFAFAF; border-radius: 30px">
+                <p:layoutUnit id="left"  position="west" size="200">
+
+                    <p:chart type="pie" model="#{pieChartBean.model1}" style="width:400px;height:300px" />
+
+                </p:layoutUnit>
+
+                <p:layoutUnit  id="right" position="west" size="200" >
+                    <center>
+                        <p:chart type="pie" model="#{pieChartBean.model2}" style="width:400px;height:300px" />
+                    </center>
+                </p:layoutUnit> 
+                <p:commandButton style="background: #ffffff;color: #e27c16;border-radius: 20px" value="Retour à l'accueil" action="#{redirectBean.versAcueil()}"/>
+
+            </p:panel>
+        </h:form>
+
+    </h:body>
+</html>
+

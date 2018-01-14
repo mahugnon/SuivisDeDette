@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Suvis de dette</title>
+    </h:head>
+ <h:body style="background-color: #4F7A4F ">
+        <h:form>
+
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                <f:facet  name="header">
+                    <b style="color: #e27c16">Détails de la dette</b> 
+                </f:facet>
+
+                <p:panel style="background: #e27c16;width: 80%; border-color: #AFAFAF;alignment-adjust: auto">
+                    <h:panelGrid columns="2" cellpadding="3" style="margin:0 auto ;" cellspacing="3">
+
+                        <p:outputLabel value="Projet : " style="color: #ffffff"/>
+                        <p:outputLabel value="#{detailDetteBean.projet.nomProjet}" style="color: #ffffff"/>
+
+                        <p:outputLabel value="Caisse de Prêt: " style="color: #ffffff"/>
+                        <p:outputLabel value="#{detailDetteBean.caisseDePret()}" style="color: #ffffff"/>
+
+                        <p:outputLabel value="Dette brute: " style="color: #ffffff"/>
+                        <p:outputLabel value="#{detailDetteBean.detteBrute()}" style="color: #ffffff"/>
+
+                        <p:outputLabel value="Dette payé: " style="color: #ffffff"/>
+                        <p:outputLabel value="#{detailDetteBean.dettePaye()}" style="color: #ffffff"/>
+
+                        <p:outputLabel value="Dette restant: " style="color: #ffffff"/>
+                        <p:outputLabel value="#{detailDetteBean.detteRestant()}" style="color: #ffffff"/>
+                    </h:panelGrid>
+                </p:panel>
+                <!--Convention-->
+                <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                    <p:commandButton style="background: #ffffff;color:#e27c16;border-radius: 20px" action="#{conventionPretBean.recupererProjet(detailDetteBean.projet)}" value="Creation de convention"/>
+                    <h:panelGrid columns="2">
+
+                        <p:outputLabel style="color: #ffffff" value="Date Convention : "/>
+                        <p:outputLabel style="color: #ffffff" value="#{detailDetteBean.dateConvention()}"/>
+
+                        <p:outputLabel style="color: #ffffff" value="Type convention : "/>
+                        <p:outputLabel style="color: #ffffff" value="#{detailDetteBean.typeConvention()}"/>
+
+                    </h:panelGrid>
+                </p:panel>
+                <!--Echéances-->
+                <h:panelGrid>
+                    <p:commandButton style="background: #ffffff;color:#e27c16;border-radius: 20px" value="Nouvelle échéance de pret" action="#{echeanceBean.recupererConventionProjet(detailDetteBean.projet)}"/>
+                    <p:dataTable  value="#{detailDetteBean.afficherEcheance(detailDetteBean.projet)}" var="echeancel"
+                                  scrollable="true" scrollHeight="150"
+                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                  rowsPerPageTemplate="1,2,3,5,6,8,10"
+                                  editable="true" draggableRows="true"  draggableColumns="true"   paginator="true" rows="10">
+
+                        <f:facet  name="header">
+                            <b style="color: #e27c16">Liste des échéances pour la Caisse relativement au projet courant</b> 
+                        </f:facet>
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="ID" >
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{echeancel.idEcheance}" />
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Montant echeance">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{echeancel.montantEcheance}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Etat echeance">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{echeancel.etatEcheance}"/>
+                        </p:column>
+
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Type convention">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{detailDetteBean.convention.type}"/>
+                        </p:column>
+
+                        <p:column style="background: #ffffff ;color: #e27c16" headerText="Date convention">
+                            <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{detailDetteBean.convention.dateAjout}" />
+                        </p:column>
+
+                        <p:column width="15">
+                            <p:commandLink action="#{echeanceBean.consulterEcheancePretBean(echeancel)}">
+                                <p:graphicImage value="images/view.png" width="17"/>
+                            </p:commandLink>
+                        </p:column>      
+
+                        <p:column width="15">
+                            <p:commandLink action="#{echeanceBean.recupererEcheancePretBean(echeancel)}">
+                                <p:graphicImage value="images/edit.png" width="17"/>
+                            </p:commandLink>
+                        </p:column> 
+                        
+                        
+                        <p:column width="15" style="background: #cccccf ;color: #e27c16">
+                        <p:commandLink onclick="PF('ss').show()" >
+                            <p:graphicImage value="images/delete.png" width="17"/>
+                        </p:commandLink>
+                        <p:confirmDialog width="450" style="color: red"  
+                                         header="Confirmation" severity="alert" widgetVar="ss">
+                            <f:facet  name="header">
+                                <b style="color: tomato">Confirmation</b> 
+                            </f:facet>
+                            <f:facet  name="message">
+                                <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                            </f:facet>
+                            <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.versDetailDette()}" type="button"/>
+                        </p:confirmDialog> 
+                    </p:column>
+
+                       
+
+                    </p:dataTable>
+
+                </h:panelGrid>
+                <p:commandButton style="background: #ffffff;color:#e27c16;border-radius: 30px" value="Retour" action="/detailProjet?faces-redirect=true"/>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

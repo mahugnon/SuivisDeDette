@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+
+        <h:body>
+            <h:form >
+
+                <p:panel style="background: #e27c16; font-style:oblique " >
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Ajouter une Société</b> 
+                    </f:facet>
+                    <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                        <p:outputLabel style="color: #ffffff" value="Nom Société:" />
+                        <p:inputText style="color: #e27c16" value="#{societeBean.societe.nomSociete}" required="true"/>
+
+                        <p:outputLabel style="color: #ffffff" value="Adresse Société:" />
+                        <p:inputText style="color: #e27c16" value="#{societeBean.societe.adresseSociete}" required="true"/>
+
+                        <p:outputLabel style="color: #ffffff" value="Nature Société:" />
+                        <h:panelGroup>
+                            <p:selectOneRadio style="color: #ffffff" value="#{societeBean.societe.nature}" required="true">
+                                <f:selectItem itemLabel="Privée" itemValue="Privée"/>
+                                <f:selectItem itemLabel="Publique" itemValue="Publique"/>
+                            </p:selectOneRadio>
+                        </h:panelGroup>
+
+                        <p:outputLabel style="color: #ffffff" value="Contact Société:" />
+                        <p:inputText style="color: #e27c16" value="#{societeBean.societe.contactSociete}"/>
+
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="Ajouter" action="#{societeBean.ajouterSocieteBean()}"/>
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="Modifier" action="#{societeBean.modifierSocieteBean()}"/>
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="Retour" action="#{redirectBean.verslisterSociete()}"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+

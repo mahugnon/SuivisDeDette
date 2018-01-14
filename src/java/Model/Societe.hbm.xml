@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Societe" table="societe" catalog="suiviDette" optimistic-lock="version">
+        <id name="idSociete" type="java.lang.Integer">
+            <column name="id_societe" />
+            <generator class="identity" />
+        </id>
+        <property name="nomSociete" type="string">
+            <column name="nom_societe" length="55" not-null="true" unique="true" />
+        </property>
+        <property name="adresseSociete" type="string">
+            <column name="adresse_societe" length="55" not-null="true" />
+        </property>
+        <property name="nature" type="string">
+            <column name="nature" length="55" not-null="true" />
+        </property>
+        <property name="contactSociete" type="string">
+            <column name="contact_societe" length="55" not-null="true" />
+        </property>
+        <set name="dettes" table="dette" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_societe" unique="true" />
+            </key>
+            <one-to-many class="Model.Dette" />
+        </set>
+        <set name="conventions" table="convention" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_societe" unique="true" />
+            </key>
+            <one-to-many class="Model.Convention" />
+        </set>
+        <set name="factures" table="facture" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_societe" not-null="true" />
+            </key>
+            <one-to-many class="Model.Facture" />
+        </set>
+    </class>
+</hibernate-mapping>

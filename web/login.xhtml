@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Authentification</title>
+         <style>               
+.Bimage{
+     background-color: #4F7A4F ;
+     
+ }   
+ .form{
+     padding-top: 150px;
+     border-radius: 8px;
+     
+ }
+         
+         </style>
+    </h:head>
+    <h:body styleClass="Bimage">
+        <h:form styleClass="form">
+            <center>
+                <p:panel style="background: #e27c16; font-style:oblique;width:40% " >
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Authentification</b> 
+                    </f:facet>
+                    <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                        <p:outputLabel style="color: #ffffff"  value="Nom utilisateur :"/>
+                        <p:autoComplete id="nomService" style="color: #e27c16" value="#{serviceBean.service.role}"/>
+                       
+                        
+                        <p:outputLabel style="color: #ffffff" value="Mot de passe :"/>
+                        <p:password id="password"  style="color: #e27c16" value="#{serviceBean.service.motDePasse}"/>
+                        
+                        <p:commandButton style="background: #ffffff;color: #e27c16" value="valider" action="#{serviceBean.verif()}"/>
+                        <p:outputLabel  style="color: #ffffff" value="#{serviceBean.message}"/>
+
+                    </h:panelGrid>
+
+                </p:panel>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

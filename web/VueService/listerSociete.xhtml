@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <p:panel   style="width:  80%;background: #e27c16; border-color: #AFAFAF;width:  80%" >
+                <!-- buton creation societe-->
+                <h:panelGroup>
+                    <p:commandLink action="#{redirectBean.verscreationSociete()}" title="Création d'une société">
+                        <p:graphicImage value="images/create.png" />
+                    </p:commandLink>
+                </h:panelGroup>
+
+                <p:dataTable value="#{societeBean.listerSocieteBean()}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5,10,20,50"
+                             scrollable="true"
+                             scrollWidth="1000"
+                             scrollHeight="200"
+                             scrollRows="100"
+                             editable="true" draggableRows="true"  id="societes" draggableColumns="true"  paginator="true" rows="10" style="margin-bottom:20px" var="societel" >
+                    <f:facet  name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste des sociétés</b> 
+                    </f:facet>
+
+                    <p:column headerText="ID" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{societel.idSociete}" filterBy="#{societel.idSociete}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{societel.idSociete}"/>
+                    </p:column>
+
+                    <p:column  headerText="Nom Société" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{societel.nomSociete}" filterBy="#{societel.nomSociete}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{societel.nomSociete}"/>
+                    </p:column>
+
+                    <p:column  headerText="Adresse Société" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{societel.adresseSociete}" filterBy="#{societel.adresseSociete}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{societel.adresseSociete}"/>
+                    </p:column>
+
+                    <p:column headerText="Nature" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{societel.nature}" filterBy="#{societel.nature}">
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{societel.nature}"/>
+                    </p:column>
+
+                    <p:column headerText="Contact Société" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{societel.contactSociete}" filterBy="#{societel.contactSociete}" >
+                        <p:outputLabel style="background: #ffffff ;color: #e27c16" value="#{societel.contactSociete}"/>
+                    </p:column>
+                    <!--button consulter societe -->
+                    <p:column   width="10">
+                        <p:commandLink action="#{detailSocieteBean.recupererSociete(societel)}" title="consulter une société">
+                            <p:graphicImage value="images/view.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <!--button modifier societe -->
+                    <p:column  width="10">
+                        <p:commandLink  action="#{societeBean.editerSocieteBean(societel)}" title="modifier une société" >
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+
+                    </p:column>
+
+                    <!--button supprimer societe -->
+                    <p:column width="15" style="background: #cccccf ;color: #e27c16">
+                        <p:commandLink onclick="PF('ss').show()" >
+                            <p:graphicImage value="images/delete.png" width="17"/>
+                        </p:commandLink>
+                        <p:confirmDialog width="450" style="color: red"  
+                                         header="Confirmation" severity="alert" widgetVar="ss">
+                            <f:facet  name="header">
+                                <b style="color: tomato">Confirmation</b> 
+                            </f:facet>
+                            <f:facet  name="message">
+                                <b style="background: #ffffff ;color: tomato">Attention !!! cette action est destinée uniquement à l'administrateur sous l'approbation du Directeur municipal</b> 
+                            </f:facet>
+                            <p:commandButton style="color: tomato;background: #ffffff" value="OK" onclick="PF('ss').hide();" action="#{redirectBean.verslisterSociete()}" type="button"/>
+                        </p:confirmDialog> 
+                    </p:column>
+
+
+                </p:dataTable>
+
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+</html>
+

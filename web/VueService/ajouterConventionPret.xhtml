@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ajout de convention de paiement d'un prêt</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto">
+                
+                 <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Ajouter Convention</b> 
+                </f:facet>
+            
+            <h:panelGrid columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+                <p:outputLabel style="color:#ffffff" value="Date Convention"/>
+                <p:outputLabel style="color:#ffffff" value="#{conventionPretBean.caissedepret.datePret}"/>
+                
+                <p:outputLabel style="color:#ffffff" value="Dette du prêt"/>
+                <p:outputLabel style="color:#ffffff" value="#{conventionPretBean.dette.montantRestant}"/>
+                
+                <p:outputLabel style="color:#ffffff" value="Date ajout convention"/>
+                <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                            timeZone="Europe/Paris" 
+                            style="background: #ffffff;color:#e27c16"
+                            value="#{conventionPretBean.convention.dateAjout}" pattern="dd/MM/yyyy" placeholder="entrer date d'ajout"/>
+                <p:outputLabel style="color:#ffffff" value="Type"/>
+                <p:selectOneRadio  style="color:#ffffff" layout="pageDirection" value="#{conventionPretBean.convention.type}">
+                
+                    <f:selectItem itemLabel="Externe" itemValue="Externe"/>
+                    <f:selectItem itemLabel="Interne" itemValue="Interne"/>
+                </p:selectOneRadio>
+                <p:commandButton style="background: #ffffff;color:#e27c16" value="Enregistrer" action="#{conventionPretBean.ajouterConvention(conventionPretBean.convention)}"/>   
+               
+                <p:commandButton style="background: #ffffff;color:#e27c16" value="Retour" action="#{redirectBean.versDetailDette()}"/>  
+            </h:panelGrid>
+            </p:panel>
+                
+        </h:form>
+    </h:body>
+</html>
+

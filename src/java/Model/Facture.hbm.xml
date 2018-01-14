@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 mai 2016 23:18:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Model.Facture" table="facture" catalog="suiviDette" optimistic-lock="version">
+        <id name="idFacture" type="java.lang.Integer">
+            <column name="id_facture" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="projet" class="Model.Projet" fetch="select">
+            <column name="id_projet" not-null="true" />
+        </many-to-one>
+        <many-to-one name="societe" class="Model.Societe" fetch="select">
+            <column name="id_societe" not-null="true" />
+        </many-to-one>
+        <property name="numFacture" type="int">
+            <column name="num_facture" not-null="true" />
+        </property>
+        <property name="dateArrive" type="date">
+            <column name="date_arrive" length="10" not-null="true" />
+        </property>
+        <property name="datePaiement" type="date">
+            <column name="date_paiement" length="10" not-null="true" />
+        </property>
+        <property name="montantFacture" type="long">
+            <column name="montant_facture" not-null="true" />
+        </property>
+        <property name="detail" type="string">
+            <column name="detail" length="65535" not-null="true" />
+        </property>
+        <property name="annee" type="int">
+            <column name="annee" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

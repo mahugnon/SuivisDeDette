@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+             <p:panel style="width:  80%;background: #e27c16; border-color: #AFAFAF;width:  80%">
+        <p:dataTable value="#{factureBean.factureAnne()}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5"
+                             scrollable="true"
+                             scrollWidth="1000"
+                             scrollHeight="200"
+                             scrollRows="100"
+                             var="factureAnneel" 
+                             editable="true" draggableRows="true"  id="factannee" draggableColumns="true"  paginator="true" rows="10" style="margin-bottom:20px" >
+                    <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Liste des factures par année</b> 
+                    <h:commandLink value="imprimer">
+                            <p:dataExporter type="pdf" target="factannee" fileName="factureParAnnee"/>
+                        </h:commandLink>
+                </f:facet>
+
+                    <p:column headerText="Année" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{factureAnneel.annee}" filterBy="#{factureAnneel.annee}">
+                        <p:outputLabel value="#{factureAnneel.annee}"/>
+                    </p:column>
+
+                    <p:column headerText="Budget de l'année" style="background: #ffffff ;color: #e27c16" width="70" >
+                        <p:outputLabel value="#{factureAnneel.budget}"/>
+                    </p:column>
+
+                    <p:column headerText="Montant Total facture" style="background: #ffffff ;color: #e27c16" width="70">
+                        <p:outputLabel value="#{factureAnneel.montantTotal}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+            
+            <p:panel style="width: 60%">
+                 <p:chart type="bar" model="#{factureBean.horizontalBarChartModel}" style="height:250px; width: 600px"/>
+            </p:panel>
+            <h:panelGrid columns="2" cellspacing="3" cellpadding="4">
+            <p:commandButton value="Retour a l'acceil"/>
+            <p:commandButton value="Lister Facture" action="#{redirectBean.verslisterFacture()}" />
+            </h:panelGrid>
+            </h:form>
+    </h:body>
+</html>
+

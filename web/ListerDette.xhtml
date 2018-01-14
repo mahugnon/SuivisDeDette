@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Liste de dette</title>
+    </h:head>
+  <h:body style="background-color: #4F7A4F ">
+        <h:form id="detteform">
+            <p:panel style="width:  92%;background: #e27c16; border-color: #AFAFAF;border-radius: 30px">
+
+                <p:dataTable value="#{detteBean.listerDetteBean()}" var="dettel"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5,10,20,50"
+                             scrollable="true"
+                             scrollWidth="1000"
+                             scrollHeight="200"
+                             scrollRows="200"
+                             editable="true" draggableRows="true"  draggableColumns="true" paginator="true" rows="10" >
+                    <f:facet name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste de dettes</b>
+                    </f:facet>
+                    <p:column width="70" style="background: #ffffff;color: #e27c16" headerText="ID"> 
+
+                        <p:outputLabel value="#{dettel.idDette}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+
+                    <p:column width="70" sortBy="#{dettel.detteBrute}" filterBy="#{dettel.detteBrute}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Montant total">
+
+                        <p:outputLabel value="#{dettel.detteBrute}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+
+                    <p:column width="70" sortBy="#{dettel.montantPaye}" filterBy="#{dettel.montantPaye}"
+                              style="background: #ffffff;color: #e27c16" headerText="Montant payé">
+
+                        <p:outputLabel value="#{dettel.montantPaye}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+
+                    <p:column width="70" sortBy="#{dettel.montantRestant}" filterBy="#{dettel.montantRestant}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Montant restant">
+
+                        <p:outputLabel value="#{dettel.montantRestant}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+
+                    <p:column width="70" sortBy="#{dettel.etat}" filterBy="#{dettel.etat}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Etat">
+
+                        <p:outputLabel value="#{dettel.etat}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+
+
+                    <!-- button consulter dette -->
+                    <p:column width="17">
+                        <h:panelGroup>
+                            <p:commandLink action="#" title="Consulter une dette ">
+                                <p:graphicImage value="images/view.png" width="17"/>
+
+                            </p:commandLink>
+                        </h:panelGroup>
+                    </p:column>
+
+                    <p:column width="17">
+                        <p:commandLink action="#{detteBean.editerDetteBean(dettel)}">
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <f:facet   name="footer">                         
+                        <p:commandLink style="left: 400px"  action="#" title="télécharger en PDF la liste des sociétés" >
+                            <p:graphicImage value="images/download.png" width="40" style="background: red;border-radius: 5px"/>
+                        </p:commandLink>
+                    </f:facet>
+                    <f:facet   name="header">                         
+                        <tt/><p:commandLink  action="#" title="télécharger en PDF la liste des sociétés" >
+                            <p:graphicImage value="images/download.png" width="40" style="background:  red;border-radius: 5px"/>
+                        </p:commandLink>
+                    </f:facet>
+
+                </p:dataTable>
+
+                <p:commandButton style="background: #ffffff ;color: #e27c16;border-radius: 20px" value="Retour à l'accueil" action="#{redirectBean.versAcueil()}"/>
+
+            </p:panel>
+
+
+        </h:form>
+    </h:body>
+</html>
+

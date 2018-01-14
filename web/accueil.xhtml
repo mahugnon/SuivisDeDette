@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <style>
+            #logo {
+                width: 50px;
+                height: 50px;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+            }
+            
+        </style>
+        <title>Accueil
+
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
+
+
+    </h:head>
+    <h:body >
+        <h:form>
+            <p:menubar>
+                <p:menuitem>
+                    <span><img id="logo" src="images/logofrançais.jpg"/>
+                    </span>
+                </p:menuitem>
+
+                <p:menuitem>
+                    <h3 style="margin-left: 300px">SUIVIS DE DETTE</h3></p:menuitem>
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:10px" placeholder="Search"/>
+                    <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                </f:facet>
+            </p:menubar>
+        </h:form>
+        <p:layout>
+
+
+
+
+            <p:layoutUnit  position="west" resizable="true" collapsible="true">
+                <!--nord, partie ouest (à gauche de la page)--> 
+                <f:facet  name="header" >
+                    <b style="background:inherit ;color: #e27c16">Actions</b> 
+                </f:facet>
+                <p:accordionPanel>
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Factures</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerFacture.xhtml" >Lister factures</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="AjouterFacture.xhtml">Ajouter facture</a></li>
+                        </ul>
+                    </p:tab>
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Sociétés</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerSociete.xhtml">Lister sociétés</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="AjouterSociete.xhtml">Ajouter société</a></li>
+                        </ul>
+                    </p:tab>
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Projets</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerProjet.xhtml">Lister projets</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="AjouterProjet.xhtml">Ajouter projet</a></li>
+                        </ul>
+                    </p:tab>
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Dettes</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="ListerDette.xhtml">Lister dettes</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listeDetteAnneeBudgetaire.xhtml">Dette année</a></li>
+                        </ul>
+                    </p:tab>
+
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Ligne budgetaire</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerLigneBudgetaire.xhtml">Lister lignes</a> </li>
+
+                        </ul>
+                    </p:tab>
+
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Caisse de prêt</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerProjet.xhtml">allé à projet</a> </li>
+                        </ul>
+                    </p:tab>
+
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Conventions</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerConvention.xhtml">lister conventions</a> </li>
+
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerProjet.xhtml">allé à projets</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerSociete.xhtml">allé au sociétés</a> </li>
+
+
+                        </ul>
+                    </p:tab>
+
+
+                    <p:tab >
+                        <f:facet  name="title" >
+                            <b style="color: #e27c16">Gestion de Bilans</b> 
+                        </f:facet>
+                        <ul type="disc">
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="Bilan Statistique.xhtml">Bilan Statistique</a> </li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listerFactureAnnee.xhtml">Facture total par année</a></li>
+                            <li style="background: #f3f2f2;color: #e27c16"><a style="color: #e27c16;background: #ffffff; text-decoration: none" href="listeDetteAnneeBudgetaire.xhtml">Dette par année</a></li>
+                        </ul>
+                    </p:tab>
+
+                </p:accordionPanel>
+
+
+            </p:layoutUnit>
+
+
+            <p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade" dynamic="true" style="width:600px; background: yellowgreen; border-bottom-color: yellow">
+
+                <p:dataTable  var="dettel" value="#{notificationBean.depasse}" rows="5" paginator="true" >
+
+                    <f:facet name="header">
+                        <b style="background: yellow">Dettes Depassées</b>    
+                    </f:facet>
+
+                    <p:column style="background: bisque" headerText="Date de dette">
+                        <h:outputText value="#{dettel.dateCreation}" />
+                    </p:column>
+
+                    <p:column style="background: bisque" headerText="Dette brute">
+                        <h:outputText value="#{dettel.detteBrute}" />
+                    </p:column>
+
+                    <p:column style="background: bisque" headerText="Montant Payé">
+                        <h:outputText value="#{dettel.montantPaye}" />
+                    </p:column>
+
+                    <p:column style="background: bisque" headerText="Montant Restant">
+                        <h:outputText value="#{dettel.montantRestant}" />
+                    </p:column>
+                </p:dataTable>
+
+                <p:dataTable  var="dettel" value="#{notificationBean.echeancement}" rows="5" paginator="true">
+
+                    <f:facet name="header">
+                        <b style="background: yellow"> Echéancements du moment</b>    
+                    </f:facet>
+
+                    <p:column style="background: bisque" headerText="Date d'écheancement">
+                        <h:outputText value="#{dettel.datePaiement}" />
+                    </p:column>
+
+                    <p:column style="background: bisque" headerText="Montant de l'échéance">
+                        <h:outputText value="#{dettel.montantEcheance}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:overlayPanel>
+
+
+            <p:layoutUnit  position="center" maxSize="600" size="600">
+                <p:commandButton id="movieBtn" style="right: inherit;background: #ffffff ;color: #e27c16" value="Notification" type="button" />
+                <h:form>
+
+                    <p:panel style="width: 800px; margin-left: 100px" >
+                        <p:dataTable styleClass="table" value="#{factureBean.factureAnne()}" 
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="1,2,3,5"
+
+                                     var="factureAnneel" 
+                                     editable="true" draggableRows="true"  id="factannee" draggableColumns="true"  paginator="true" rows="10" 
+                                     >
+                            <f:facet  name="header">
+                                <b style="background: #cccccf ;color: #e27c16">Liste des factures par année</b> 
+
+                            </f:facet>
+
+                            <p:column headerText="Année" style="background: #ffffff ;color: #e27c16" width="70" sortBy="#{factureAnneel.annee}" filterBy="#{factureAnneel.annee}">
+                                <p:outputLabel value="#{factureAnneel.annee}"/>
+                            </p:column>
+
+                            <p:column headerText="Budget de l'année" style="background: #ffffff ;color: #e27c16" width="70" >
+                                <p:outputLabel value="#{factureAnneel.budget}"/>
+                            </p:column>
+
+                            <p:column headerText="Montant Total facture" style="background: #ffffff ;color: #e27c16" width="70">
+                                <p:outputLabel value="#{factureAnneel.montantTotal}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                        <p:panel header="Graph de Facture reçu" style="margin-top: 50px" >
+                            <p:chart type="bar" model="#{factureBean.horizontalBarChartModel}" style="height:250px; width: 600px;background: #ffffff"/>
+
+                        </p:panel>
+                    </p:panel>
+
+
+
+
+
+
+                </h:form>
+            </p:layoutUnit>
+
+
+        </p:layout>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"/>
+    </h:body>
+</html>
+

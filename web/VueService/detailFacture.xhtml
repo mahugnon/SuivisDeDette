@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel style="background: #e27c16; border-color: #AFAFAF;alignment-adjust: auto" >
+                <f:facet  name="header">
+                    <b style="background: #cccccf ;color: #e27c16">Details sur la facture</b> 
+                </f:facet>
+   
+                <h:panelGrid  columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                    <p:outputLabel value="ID :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.numFacture}" style="color: #ffffff"/>
+
+
+                    <p:outputLabel value="Projet :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.afficherProjetFactureBean(factureBean.facture)}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Société :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.afficherSocieteFactureBean(factureBean.facture)}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Date d'arrivé :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.dateArrive}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Date de Paiement" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.datePaiement}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Montant facture :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.montantFacture}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Detail facture :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.detail}" style="color: #ffffff"/>
+
+                    <p:outputLabel value="Année de facture :" style="color: #ffffff"/>
+                    <p:outputLabel value="#{factureBean.facture.annee}" style="color: #ffffff"/>
+                    
+                    <p:commandButton style="background: #ffffff ;color: #e27c16" value="Imprimer" action="#"/>
+                    <p:commandButton style="background: #ffffff ;color: #e27c16" value="Retour" action="#{redirectBean.verslisterFacture()}"/>
+                    
+
+                </h:panelGrid>
+                   </p:panel>
+                </h:form>    
+    </h:body>
+</html>
+

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Suivis de Dette</title>
+    </h:head>
+    <h:body>
+        <h:form id="detteform">
+            <p:panel style="width:  80%;background: #e27c16; border-color: #AFAFAF;width:  80%">
+                
+                <p:dataTable value="#{detteBean.listerDetteBean()}" var="dettel"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="1,2,3,5"
+                             scrollable="true"
+                             scrollWidth="1000"
+                             scrollHeight="200"
+                             scrollRows="100"
+                             editable="true" draggableRows="true"  draggableColumns="true" paginator="true" rows="10" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        <b style="background: #cccccf ;color: #e27c16">Liste de dettes</b>
+                    </f:facet>
+                    <p:column style="background: #ffffff;color: #e27c16" headerText="ID"> 
+               
+                        <p:outputLabel value="#{dettel.idDette}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{dettel.detteBrute}" filterBy="#{dettel.detteBrute}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Montant total">
+                 
+                        <p:outputLabel value="#{dettel.detteBrute}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{dettel.montantPaye}" filterBy="#{dettel.montantPaye}"
+                              style="background: #ffffff;color: #e27c16" headerText="Montant payé">
+ 
+                        <p:outputLabel value="#{dettel.montantPaye}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{dettel.montantRestant}" filterBy="#{dettel.montantRestant}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Montant restant">
+                       
+                        <p:outputLabel value="#{dettel.montantRestant}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{dettel.etat}" filterBy="#{dettel.etat}" 
+                              style="background: #ffffff;color: #e27c16" headerText="Etat">
+                       
+                        <p:outputLabel value="#{dettel.etat}" style="background: #ffffff;color: #e27c16"/>
+                    </p:column>
+                    
+                    
+                    <!-- button consulter dette -->
+                    <p:column>
+                        <h:panelGroup>
+                            <p:commandLink update=":detteform:consultation:consulter" onclick="PF('cd').show()" title="Consulter une dette ">
+                                <p:graphicImage value="images/view.png" width="17"/>
+                                <f:setPropertyActionListener value="#{dettel}" target="#{detteBean.dette}"/>
+                            </p:commandLink>
+                        </h:panelGroup>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:commandLink action="#{detteBean.editerDetteBean(dettel)}">
+                            <p:graphicImage value="images/edit.png" width="17"/>
+                        </p:commandLink>
+                    </p:column>
+
+
+                    <!-- button modifier dette
+                    <p:column>
+                        <h:panelGroup>
+                            <p:commandLink id="dettel" update=":detteform:modificationDette:modifierDette" onclick="PF('md').show()" title="modifier une dette ">
+                                <p:graphicImage value="images/edit.png"/>
+                                <f:setPropertyActionListener value="#{dettel}" target="#{detteBean.dette}"/>
+                            </p:commandLink>
+                        </h:panelGroup>
+                    </p:column>-->
+                </p:dataTable>
+            </p:panel>
+
+            <!-- Consultation d'une dette -->
+            <h:form id="consultation">
+                <p:dialog header="Detail de la dette sélectionnée" widgetVar="cd" resizable="false" id="carDlg"
+                          showEffect="fade" hideEffect="explode" modal="true" >
+                    <h:panelGrid  id="consulter" columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                        <p:outputLabel value="Numéro :" />
+                        <h:outputText value="#{detteBean.dette.idDette}" style="font-weight:bold;" /> 
+
+                        <p:outputLabel value="Montant dette :" />
+                        <h:outputText value="#{detteBean.dette.montantDette}" style="font-weight:bold" /> 
+
+                        <p:outputLabel value="Montant payé :" />
+                        <h:outputText value="#{detteBean.dette.montantPaye}" style="font-weight:bold"/>
+
+                        <p:outputLabel value="Etat de la dette :"/>
+                        <h:outputText value="#{detteBean.dette.etat}" style="font-weight:bold"/>
+
+                        <p:outputLabel value="Date Création :" />
+                        <h:outputText value="#{detteBean.dette.dateCreation}" style="font-weight:bold"/>
+
+                        <p:commandButton value="Annuler" onclick="PF('cd').hide()"/>
+
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+
+            <!-- Dialog modifier dette
+            <h:form id="modificationDette">
+                <p:dialog header="Modification d'une dette" widgetVar="md" resizable="false" id="carDlg"
+                          showEffect="fade" hideEffect="explode" modal="true" >
+                    <h:panelGrid  id="modifierDette" columns="2" cellpadding="4" style="margin:0 auto ;" cellspacing="3">
+
+                        <p:outputLabel value="Numéro :" />
+                        <h:inputText value="#{detteBean.dette.idDette}" style="font-weight:bold" /> 
+
+                        <h:outputText value="Montant dette :" />
+                        <h:inputText value="#{detteBean.dette.montantDette}" style="font-weight:bold" /> 
+
+                        <p:outputLabel value="Montant payé :" />
+                        <h:inputText value="#{detteBean.dette.montantPaye}" style="font-weight:bold"/>
+
+                        <p:outputLabel value="Etat de la dette :"/>
+                        <h:inputText value="#{detteBean.dette.etat}" style="font-weight:bold"/>
+
+                        <p:outputLabel value="Date Création :" />
+                        <p:calendar locale="tr" showButtonPanel="true" navigator="true" showWeek="true"
+                                    timeZone="Europe/Paris" 
+                                    value="#{detteBean.dette.dateCreation}" pattern="dd/MM/yyyy"/>
+                        <p:commandButton value="Modifier" action="#{detteBean.modifierDetteBean()}"/>
+                        <p:commandButton value="Annuler" onclick="PF('md').hide()"/>
+
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>-->
+        </h:form>
+    </h:body>
+</html>
+

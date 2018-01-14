@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="suiviDette"/>
+  <table-filter match-name="projet"/>
+  <table-filter match-name="societe"/>
+  <table-filter match-name="dette"/>
+  <table-filter match-name="lignebudgetaire"/>
+  <table-filter match-name="facture"/>
+  <table-filter match-name="caissedepret"/>
+  <table-filter match-name="tranche"/>
+  <table-filter match-name="convention"/>
+  <table-filter match-name="service"/>
+  <table-filter match-name="echeance"/>
+</hibernate-reverse-engineering>
